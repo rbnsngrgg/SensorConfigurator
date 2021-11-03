@@ -8,11 +8,11 @@ namespace SensorConfigurator.Objects
     {
         public string RectStandConfigPath { get; private set; }
         public string RectImagesPath { get; private set; }
+        public string FileName { get; } = "SCConfig.xml";
+        public string FilePath { get; private set; }
 
         private readonly IFileWrapper fileWrapper;
         private readonly IDirectoryWrapper directoryWrapper;
-        private readonly string fileName = "SCConfig.xml";
-        private string filePath;
 
         public SCConfig()
         {
@@ -28,8 +28,8 @@ namespace SensorConfigurator.Objects
 
         public virtual void Init()
         {
-            filePath = Path.Combine(this.directoryWrapper.GetCurrentDirectory(), fileName);
-            if (!fileWrapper.Exists(filePath))
+            FilePath = Path.Combine(directoryWrapper.GetCurrentDirectory(), FileName);
+            if (!fileWrapper.Exists(FilePath))
             {
                 CreateConfig();
             }
@@ -38,29 +38,29 @@ namespace SensorConfigurator.Objects
 
         private void CreateConfig()
         {
-            MemoryStream configStream = new();
-            XmlWriter configWriter = XmlWriter.Create(configStream);
+            MemoryStream memStream = new();
+            XmlWriter writer = XmlWriter.Create(memStream);
 
-            configWriter.WriteStartDocument();
-            configWriter.WriteStartElement("Configurator");
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Configurator");
 
-            configWriter.WriteAttributeString("RectStandConfigPath", "\\\\castor\\ftproot\\RectData\\Configuration Files\\CMM1 Config\\");
-            configWriter.WriteAttributeString("RectImagesPath", "H:\\RectImages\\");
+            writer.WriteAttributeString("RectStandConfigPath", "\\\\castor\\ftproot\\RectData\\Configuration Files\\CMM1 Config\\");
+            writer.WriteAttributeString("RectImagesPath", "H:\\RectImages\\");
 
-            configWriter.WriteEndElement();
-            configWriter.WriteEndDocument();
-            configWriter.Close();
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
 
-            configStream.Position = 0;
-            using StreamReader streamReader = new(configStream);
+            memStream.Position = 0;
+            using StreamReader streamReader = new(memStream);
             string xml = streamReader.ReadToEnd();
-            fileWrapper.WriteAllText(filePath, xml);
+            fileWrapper.WriteAllText(FilePath, xml);
         }
 
         private void LoadConfig()
         {
             XmlDocument config = new();
-            config.LoadXml(string.Join(' ', fileWrapper.ReadAllText(filePath)));
+            config.LoadXml(string.Join(' ', fileWrapper.ReadAllText(FilePath)));
             XmlNodeList elements = config.GetElementsByTagName("Configurator");
             if (elements != null)
             {
