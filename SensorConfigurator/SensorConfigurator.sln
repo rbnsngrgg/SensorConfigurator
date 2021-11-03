@@ -3,7 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorConfigrator", "SensorConfigrator.csproj", "{E5840085-7E10-42E8-B404-14FEE547A65C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorConfigurator", "SensorConfigurator.csproj", "{E5840085-7E10-42E8-B404-14FEE547A65C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SensorConfiguratorTests", "..\SensorConfiguratorTests\SensorConfiguratorTests.csproj", "{290F57E8-F85A-4C46-AE2A-F34E4180771D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5892CBEF-5AE3-4B0E-BEBC-8D682C2349DF}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +22,10 @@ Global
 		{E5840085-7E10-42E8-B404-14FEE547A65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5840085-7E10-42E8-B404-14FEE547A65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5840085-7E10-42E8-B404-14FEE547A65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290F57E8-F85A-4C46-AE2A-F34E4180771D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290F57E8-F85A-4C46-AE2A-F34E4180771D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290F57E8-F85A-4C46-AE2A-F34E4180771D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290F57E8-F85A-4C46-AE2A-F34E4180771D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

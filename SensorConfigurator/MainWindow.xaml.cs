@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using SensorConfigurator.Objects;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SensorConfigrator
+namespace SensorConfigurator
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,5 +25,6 @@ namespace SensorConfigrator
         {
             InitializeComponent();
         }
+        //TODO: Add error handling and create class for logging.
     }
 }
