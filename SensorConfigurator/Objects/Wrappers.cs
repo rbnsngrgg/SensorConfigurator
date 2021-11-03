@@ -9,11 +9,6 @@ namespace SensorConfigurator.Objects
 {
 #nullable enable
     //Interfaces
-    public interface IConfigurator
-    {
-        public SCConfig Config { get; }
-        public void InitializeConfigurator(SCConfig? config = null);
-    }
     public interface IDirectoryWrapper
     {
         public bool Exists(string? path);
@@ -33,11 +28,6 @@ namespace SensorConfigurator.Objects
 
 
     //Implementations
-    public class ConfiguratorWrapper : IConfigurator
-    {
-        public SCConfig Config => Configurator.Config;
-        public void InitializeConfigurator(SCConfig? config = null) => Configurator.InitializeConfigurator(config);
-    }
     public class DirectoryWrapper : IDirectoryWrapper
     {
         public virtual bool Exists(string? path) => Directory.Exists(path);
