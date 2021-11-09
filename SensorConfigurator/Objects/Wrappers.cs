@@ -19,6 +19,7 @@ namespace SensorConfigurator.Objects
     }
     public interface IFileWrapper
     {
+        public void AppendAllLines(string path, IEnumerable<string> contents);
         public bool Exists(string? path);
         public string[] ReadAllLines(string path);
         public string ReadAllText(string path);
@@ -38,6 +39,7 @@ namespace SensorConfigurator.Objects
     }
     public class FileWrapper : IFileWrapper
     {
+        public virtual void AppendAllLines(string path, IEnumerable<string> contents) => File.AppendAllLines(path, contents);
         public virtual bool Exists(string? path) => File.Exists(path);
         public virtual string[] ReadAllLines(string path) => File.ReadAllLines(path);
         public virtual string ReadAllText(string path) => File.ReadAllText(path);

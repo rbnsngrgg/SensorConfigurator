@@ -6,10 +6,11 @@ namespace SensorConfigurator.Objects
 {
     public class SCConfig
     {
-        public string RectStandConfigPath { get; private set; }
-        public string RectImagesPath { get; private set; }
-        public string FileName { get; } = "SCConfig.xml";
-        public string FilePath { get; private set; }
+        public virtual string FileName { get; } = "SCConfig.xml";
+        public virtual string FilePath { get; private set; }
+        public virtual string RectDataPath { get; private set; }
+        public virtual string RectImagesPath { get; private set; }
+        public virtual string RectStandConfigPath { get; private set; }
 
         private readonly IFileWrapper fileWrapper;
         private readonly IDirectoryWrapper directoryWrapper;
@@ -44,8 +45,10 @@ namespace SensorConfigurator.Objects
             writer.WriteStartDocument();
             writer.WriteStartElement("Configurator");
 
-            writer.WriteAttributeString("RectStandConfigPath", "\\\\castor\\ftproot\\RectData\\Configuration Files\\CMM1 Config\\");
+            writer.WriteAttributeString("RectDataPath", "\\\\castor\\Ftproot\\RectData\\");
             writer.WriteAttributeString("RectImagesPath", "H:\\RectImages\\");
+            writer.WriteAttributeString("RectStandConfigPath", "\\\\castor\\ftproot\\RectData\\Configuration Files\\CMM1 Config\\");
+            
 
             writer.WriteEndElement();
             writer.WriteEndDocument();
@@ -64,11 +67,16 @@ namespace SensorConfigurator.Objects
             XmlNodeList elements = config.GetElementsByTagName("Configurator");
             if (elements != null)
             {
-                _ = elements[0].Attributes.GetNamedItem("RectImagesPath") ?? throw new ArgumentException();
-                RectImagesPath = elements[0].Attributes.GetNamedItem("RectImagesPath").Value;
-
-                _ = elements[0].Attributes.GetNamedItem("RectStandConfigPath") ?? throw new ArgumentException();
-                RectStandConfigPath = elements[0].Attributes.GetNamedItem("RectStandConfigPath").Value ?? throw new ArgumentException();
+                try
+                {
+                    RectDataPath = elements[0].Attributes.GetNamedItem("RectDataPath").Value;
+                    RectImagesPath = elements[0].Attributes.GetNamedItem("RectImagesPath").Value;
+                    RectStandConfigPath = elements[0].Attributes.GetNamedItem("RectStandConfigPath").Value;
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException($"SCConfig.LoadConfig: {ex.Message}");
+                }
             }
         }
     }

@@ -27,5 +27,12 @@ namespace SensorConfiguratorTests.ObjectTests
             Configurator.InitializeConfigurator(configMock.Object);
             Assert.IsInstanceOf<SCConfig>(Configurator.Config);
         }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            Configurator.Reset();
+        }
+
     }
 }

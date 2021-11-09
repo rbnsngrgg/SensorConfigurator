@@ -21,10 +21,16 @@ namespace SensorConfigurator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AppLogger appLogger = new();
         public MainWindow()
         {
             InitializeComponent();
         }
-        //TODO: Add error handling and create class for logging.
+
+        private void DisplayAndLogError(string caption, string message)
+        {
+            _ = MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
+            appLogger.Write($"{caption}: {message}");
+        }
     }
 }
